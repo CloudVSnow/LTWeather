@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cloudvsnow.ltweather.MainActivity
 import com.cloudvsnow.ltweather.R
 import com.cloudvsnow.ltweather.UI.weather.WeatherActivity
 import kotlinx.android.synthetic.main.fragment_place.*
@@ -32,7 +33,7 @@ class PlaceFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //先从本地读
-        if (viewModel.isPlaceSaved()) {
+        if (viewModel.isPlaceSaved() && activity is MainActivity) {
             val place = viewModel.getSavedPlace()
             val intent = Intent(context,
                 WeatherActivity::class.java).apply {
