@@ -11,8 +11,11 @@ import kotlin.coroutines.suspendCoroutine
 
 object WeatherNetwork {
     private val placeInterface = ServiceCreator.create<PlaceInterface>()
-
     suspend fun searchPlaces(query: String) = placeInterface.searchPlaces(query).await()
+
+    private val weatherInterface = ServiceCreator.create<WeatherInterface>()
+    suspend fun getDailyWeather(lng: String, lat: String) = weatherInterface.getDailyWeather(lng, lat).await()
+    suspend fun getRealtimeWeather(lng: String, lat: String) = weatherInterface.getRealtimeWeather(lng,lat).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine {
@@ -31,6 +34,9 @@ object WeatherNetwork {
             })
         }
     }
+
+
+
 }
 
 /*
